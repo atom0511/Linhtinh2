@@ -1,5 +1,6 @@
 package trungatom.tqt.trungtestandroid.viewmodel;
 
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ViewGroup;
@@ -8,14 +9,17 @@ import androidx.lifecycle.ViewModel;
 
 import trungatom.tqt.trungtestandroid.LoginCallBacks;
 import trungatom.tqt.trungtestandroid.model.User;
+import trungatom.tqt.trungtestandroid.model.share_pref.UserSharePref;
 
 public class LoginViewModel extends ViewModel {
     private User user;
     private LoginCallBacks loginCallBacks;
+    private UserSharePref userSharePref;
 
-    public LoginViewModel(LoginCallBacks loginCallBacks) {
+    public LoginViewModel(LoginCallBacks loginCallBacks, UserSharePref userSharePref) {
         this.loginCallBacks = loginCallBacks;
         this.user = new User();
+        this.userSharePref = userSharePref;
     }
 
     public User getmUser() {
@@ -75,6 +79,9 @@ public class LoginViewModel extends ViewModel {
     public void onLoginButtonClick() {
         if (user.isValid()) {
             loginCallBacks.onLoginsuccessful("Login Successful");
+            if (1 + 1 == 2) {
+                userSharePref.saveData();
+            }
         } else {
             loginCallBacks.onFailure("Login Failure");
         }
